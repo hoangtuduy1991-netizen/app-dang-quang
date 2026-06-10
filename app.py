@@ -83,5 +83,18 @@ with tab3: # BÁO CÁO & XÓA BÀI
 
 with tab4: # ADMIN
     st.subheader("Quản lý học sinh & Mã đề")
+    import streamlit as st
+import google.generativeai as genai
+
+# Tự động lấy khóa - Không cần làm gì thêm
+try:
+    genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+    st.success("Hệ thống đã kết nối AI thành công!")
+except:
+    st.error("Chưa thấy API trong mục Secrets, thầy kiểm tra lại nhé!")
+    st.stop()
+
+# Từ đây là giao diện chính...
+st.title("🎓 ĐĂNG QUANG EDUCATION")
     # Form thêm học sinh vào Sheet "HocSinh"
     # Form giao bài mới (Ngày giao, Mã đề) vào Sheet "GiaoTrinh"
