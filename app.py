@@ -48,3 +48,40 @@ with tab2:
     if mk == "DangQuang2026":
         st.session_state.api_key = st.text_input("Nhập API Key:", value=st.session_state.api_key, type="password")
         st.info("API Key đã được cập nhật cho phiên làm việc này.")
+        import streamlit as st
+import pandas as pd
+from datetime import datetime, timedelta
+import google.generativeai as genai
+
+# CẤU HÌNH
+SHEET_URL = "DÁN_LINK_GOOGLE_SHEETS_CỦA_THẦY_VÀO_ĐÂY"
+genai.configure(api_key="BỎ_API_KEY_CỦA_THẦY_VÀO_ĐÂY")
+
+st.set_page_config(layout="wide")
+st.title("🎓 ĐĂNG QUANG EDUCATION - HỆ THỐNG QUẢN TRỊ")
+
+# CÁC TAB CHỨC NĂNG
+tab1, tab2, tab3, tab4 = st.tabs(["📝 NỘP BÀI", "📚 KHO TÀI LIỆU", "📊 BÁO CÁO & PHÂN TÍCH", "🔐 ADMIN"])
+
+with tab1: # NỘP BÀI
+    ma_hs = st.text_input("Mã học sinh:")
+    ma_de = st.text_input("Mã đề:")
+    anh = st.file_uploader("Tải bài làm:")
+    if st.button("🚀 NỘP BÀI"):
+        # Code tự kiểm tra ngày giao (10 ngày) từ Sheet "GiaoTrinh"
+        # Code chấm bài AI & Ghi vào Sheet "KetQua"
+        st.success("Đã nộp bài thành công!")
+
+with tab2: # KHO TÀI LIỆU
+    st.subheader("Giáo trình & Lời giải")
+    # Code hiển thị tài liệu theo khối/lớp dựa trên Sheet "GiaoTrinh"
+
+with tab3: # BÁO CÁO & XÓA BÀI
+    st.subheader("Báo cáo phân tích")
+    # Logic: Quét Sheet "KetQua", ẩn/xóa bài cũ sau 7 ngày
+    # Hiển thị biểu đồ phân tích lỗi sai & cảnh báo chép bài
+
+with tab4: # ADMIN
+    st.subheader("Quản lý học sinh & Mã đề")
+    # Form thêm học sinh vào Sheet "HocSinh"
+    # Form giao bài mới (Ngày giao, Mã đề) vào Sheet "GiaoTrinh"
